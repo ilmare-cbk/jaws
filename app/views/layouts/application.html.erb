@@ -4,7 +4,13 @@
 	<title>Jaws: we are Jaws</title>
 	<%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
 	<%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+
 	<%= csrf_meta_tags %>
+	
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css">
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
 	<link href="https://slack.global.ssl.fastly.net/508c4/style/libs/lato-1-compressed.css" rel="stylesheet" type="text/css">
 	<link href="https://slack.global.ssl.fastly.net/d103/style/rollup-landing.css" rel="stylesheet" type="text/css">
 </head>
@@ -18,7 +24,7 @@
 		<li><a  href="/home/chatting" data-qa="blog">Real-time Chat</a></li>		<!--채팅-->
 		<li><a  href="/home/members" data-qa="support">Members</a></li>
 		<% if user_signed_in? %>
-			<li class="sign_out"><a href="/users/sign_out" data-qa="sign_out">Sign out</a></li>
+			<li class="sign_out"><%= link_to('Sign out', destroy_user_session_path, :method => :delete) %></li>
 		<% else %>
 			<li class="sign_up"><a href="/users/sign_up" data-qa="sign_up">Sign up</a></li>
 			<li class="sign_in"><a href="/users/sign_in" data-qa="sign_in">Sign in</a></li>

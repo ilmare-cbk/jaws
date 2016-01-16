@@ -1,4 +1,4 @@
-<div id="story" class="marsandbeyond signup signup_a signup_c top top_story_header ">
+<!-- <div id="story" class="marsandbeyond signup signup_a signup_c top top_story_header ">
 	<div class="cta_ad">
 		<h1 class="cta_story_header">					
 			
@@ -8,10 +8,10 @@
 			<div class="cta_subheader">
 				
 				<div class = "row" style = "width: 100%">
-					<div class = "col-sm-2">
+					<div class = "col-sm-3">
 						주승환
 					</div>
-					<div class = "col-sm-10" style="text-align: left">
+					<div class = "col-sm-9" style="text-align: left">
 						안녕!!!
 					</div>
 				</div>
@@ -28,4 +28,48 @@
 		<strong><a href="http://mars.nasa.gov/msl" target="_blank">Curiosity Rover</a></strong><br />
 		<a href="https://www.google.com/mars/#lat=-4.565473&amp;lon=-222.448435&amp;zoom=4&amp;q=curiosity" target="google_maps"><i class="ts_icon ts_icon_location_pin ts_icon_inherit"></i> Mars, the Milky Way</a>
 	</div>
+</div> -->
+
+<br><br><br>
+<div id="messages" style="overflow-y:scroll; height:300px; ">
+    <% @chattings.each do |c| %>
+        <p><%= c.user.username %> : <%= c.content %> ( <%= c.written_time %> ) </p>
+    <% end %>
 </div>
+<input type="text" id="chat_content">
+<a href="#" id="submit_chat">전송</a>
+
+<script>
+$(function() {
+    var objDiv = document.getElementById("messages");
+    objDiv.scrollTop = objDiv.scrollHeight;
+
+    var pusher = new Pusher('7094118b0d9572797b32', {
+      encrypted: true
+    });
+    var channel = pusher.subscribe('chat_room');
+    channel.bind('new_msg', function(data) {
+      //alert(data.message);
+      $("#messages").append("<p>" + data.username + " : " + data.msg + " ( " + data.time + " ) " + "</p>");
+      $("#chat_content").val('');
+      $("#chat_content").focus();
+      objDiv.scrollTop = objDiv.scrollHeight;
+    });
+    
+    $("#submit_chat").click(function(){
+       $.ajax({
+           data:
+           {
+               message: $("#chat_content").val()
+           },
+           method: "POST",
+           url: "/home/write_chat",
+           success: function()
+           {
+               // alert("hi");
+           }
+           
+       });
+    });
+});
+</script>

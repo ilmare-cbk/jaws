@@ -1,5 +1,11 @@
 Rails.application.routes.draw do
+<<<<<<< HEAD
   get 'home/index'
+=======
+  devise_for :users
+  root 'home#index'
+  match ':controller(/:action(/:id))', :via => [:post, :get]
+>>>>>>> e7be5160316569af0484ca35ebec7e1d8084a198
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

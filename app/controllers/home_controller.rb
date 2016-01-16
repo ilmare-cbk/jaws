@@ -4,4 +4,7 @@ class HomeController < ApplicationController
   
   def members
   end
+
+  def chatting
+  end
 end

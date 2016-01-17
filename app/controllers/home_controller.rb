@@ -14,6 +14,7 @@ class HomeController < ApplicationController
   def write_chat
     Pusher.trigger('chat_room', 'new_msg', {
       msg: params[:message],
+      user_id: current_user.id,
       username: current_user.username,
       time: Time.now.in_time_zone(9).strftime("%Y/%m/%d \n %a %p %I:%M:%S")
     })    

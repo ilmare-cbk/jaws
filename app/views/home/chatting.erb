@@ -1,46 +1,47 @@
-<!-- <div id="story" class="marsandbeyond signup signup_a signup_c top top_story_header ">
-	<div class="cta_ad">
-		<h1 class="cta_story_header">					
-			
-		</h1>
+<nav class="top persistent">
+  <a href="https://slack.com/" class="logo" data-qa="logo"></a>
+    <ul>
+    <li><a  href="#" data-qa="product">Notice</a></li>  <!--공지사항-->
+    <li><a  href="#" data-qa="pricing">Post</a></li>  <!--게시판-->
+    <li><a  href="#" data-qa="blog">Scrum</a></li>    <!--스크럼 게시판-->
+    <li><a  href="/home/chatting" data-qa="blog">Real-time Chat</a></li>    <!--채팅-->
+    <li><a  href="/home/members" data-qa="support">Members</a></li>
+    <% if user_signed_in? %>
+      <li class="sign_out"><%= link_to('Sign out', destroy_user_session_path, :method => :delete) %></li>
+    <% else %>
+      <li class="sign_up"><a href="/users/sign_up" data-qa="sign_up">Sign up</a></li>
+      <li class="sign_in"><a href="/users/sign_in" data-qa="sign_in">Sign in</a></li>
+    <% end %>
+  </ul>
+</nav>
 
-		<div class="cta_container" style = "width: 70%">
-			<div class="cta_subheader">
-				
-				<div class = "row" style = "width: 100%">
-					<div class = "col-sm-3">
-						주승환
-					</div>
-					<div class = "col-sm-9" style="text-align: left">
-						안녕!!!
-					</div>
-				</div>
-				
-			</div>
-			
 
-			
-		</div>
-		
-		
-	</div>
-	<div id="story_location">
-		<strong><a href="http://mars.nasa.gov/msl" target="_blank">Curiosity Rover</a></strong><br />
-		<a href="https://www.google.com/mars/#lat=-4.565473&amp;lon=-222.448435&amp;zoom=4&amp;q=curiosity" target="google_maps"><i class="ts_icon ts_icon_location_pin ts_icon_inherit"></i> Mars, the Milky Way</a>
-	</div>
-</div> -->
-
-<br><br><br>
-<div id="messages" style="overflow-y:scroll; height:300px; ">
+<div id="messages" style="overflow-y:scroll; overflow-x:hidden; height:700px; ">
     <% @chattings.each do |c| %>
-        <p><%= c.user.username %> : <%= c.content %> ( <%= c.written_time %> ) </p>
+      <div class="row" style="height:50px">
+        <div class="col-md-1">
+          <% if c.user.username == current_user.username %>
+            <p style="text-align:center; font-weight:900; color:#47C83E"><%= c.user.username %></p>
+          <% else %>
+            <p style="text-align:center; font-weight:900; color:#6799FF"><%= c.user.username %></p>
+          <% end %>
+        </div>
+        <div class="col-md-8">
+          <p><%= c.content %></p>
+        </div>
+        <div class="col-md-3">
+          <p><%=c.written_time %></p>
+        </div>
+      </div>  
     <% end %>
 </div>
+
 <input type="text" id="chat_content">
-<a href="#" id="submit_chat">전송</a>
+<button href="#" id="submit_chat" type="button" class="btn btn-info" style="width: 100%">전송</button>
 
 <script>
 $(function() {
+    
     var objDiv = document.getElementById("messages");
     objDiv.scrollTop = objDiv.scrollHeight;
 
@@ -50,7 +51,18 @@ $(function() {
     var channel = pusher.subscribe('chat_room');
     channel.bind('new_msg', function(data) {
       //alert(data.message);
-      $("#messages").append("<p>" + data.username + " : " + data.msg + " ( " + data.time + " ) " + "</p>");
+
+      if(data.user_id == <%= current_user.id %>)
+      {
+        $("#messages").append("<div class='row' "+"style="+"'height:50px'>"+"<div class='"+"col-md-1'>"+"<p style='"+"text-align:center; font-weight:900; color:#47C83E'>"+data.username+"</p>"+"</div>"+"<div class='"+"col-md-8'>"+"<p>"+data.msg+"</p></div>"+"<div class='col-md-3'><p>"+data.time+"</p></div></div>");   
+      }
+      else
+      {
+        $("#messages").append("<div class='row' "+"style="+"'height:50px'>"+"<div class='"+"col-md-1'>"+"<p style='"+"text-align:center; font-weight:900; color:#6799FF'>"+data.username+"</p>"+"</div>"+"<div class='"+"col-md-8'>"+"<p>"+data.msg+"</p></div>"+"<div class='col-md-3'><p>"+data.time+"</p></div></div>");   
+      } 
+         
+
+      // $("#messages").append("<p>" + data.username + " : " + data.msg + " ( " + data.time + " ) " + "</p>");
       $("#chat_content").val('');
       $("#chat_content").focus();
       objDiv.scrollTop = objDiv.scrollHeight;

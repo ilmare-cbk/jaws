@@ -1,5 +1,9 @@
 source 'https://rubygems.org'
 
+gem 'pusher'
+gem 'bcrypt-ruby', '3.1.1.rc1', :require => 'bcrypt'
+gem 'coffee-script-source', '1.8.0'
+gem 'tzinfo-data'
 gem 'devise'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.4'

@@ -54,7 +54,9 @@ $(function() {
 
       if(data.user_id == <%= current_user.id %>)
       {
-        $("#messages").append("<div class='row' "+"style="+"'height:50px'>"+"<div class='"+"col-md-1'>"+"<p style='"+"text-align:center; font-weight:900; color:#47C83E'>"+data.username+"</p>"+"</div>"+"<div class='"+"col-md-8'>"+"<p>"+data.msg+"</p></div>"+"<div class='col-md-3'><p>"+data.time+"</p></div></div>");   
+        $("#messages").append("<div class='row' "+"style="+"'height:50px'>"+"<div class='"+"col-md-1'>"+"<p style='"+"text-align:center; font-weight:900; color:#47C83E'>"+data.username+"</p>"+"</div>"+"<div class='"+"col-md-8'>"+"<p>"+data.msg+"</p></div>"+"<div class='col-md-3'><p>"+data.time+"</p></div></div>"); 
+        $("#chat_content").val('');
+        $("#chat_content").focus();  
       }
       else
       {
@@ -63,8 +65,7 @@ $(function() {
          
 
       // $("#messages").append("<p>" + data.username + " : " + data.msg + " ( " + data.time + " ) " + "</p>");
-      $("#chat_content").val('');
-      $("#chat_content").focus();
+      
       objDiv.scrollTop = objDiv.scrollHeight;
     });
     

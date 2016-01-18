@@ -16,68 +16,79 @@
 	<link href="https://slack.global.ssl.fastly.net/d103/style/rollup-landing.css" rel="stylesheet" type="text/css">
 </head>
 		
-<nav class="top no_sticky" aria-hidden="true" data-no-scroll="1">
-	<a href="/" class="logo" data-qa="logo"></a>
-	<ul>
-		<li><a  href="#" data-qa="product">Notice</a></li>  <!--공지사항-->
-		<li><a  href="#" data-qa="pricing">Post</a></li>	<!--게시판-->
-		<li><a  href="#" data-qa="blog">Scrum</a></li>		<!--스크럼 게시판-->
-		<li><a  href="/home/chatting" data-qa="blog">Real-time Chat</a></li>		<!--채팅-->
-		<li><a  href="/home/members" data-qa="support">Members</a></li>
-		<% if user_signed_in? %>
-			<li class="sign_out"><%= link_to('Sign out', destroy_user_session_path, :method => :delete) %></li>
-		<% else %>
-			<li class="sign_up"><a href="/users/sign_up" data-qa="sign_up">Sign up</a></li>
-			<li class="sign_in"><a href="/users/sign_in" data-qa="sign_in">Sign in</a></li>
-		<% end %>
-	</ul>
-</nav>
+
 
 <body>
+	<% if params[:action] != 'index' %>
+	<script type="text/javascript">
+		$(function(){
+			$('nav').css('background-color','black');
+		});
+	</script>
+	<% end %>
+	
+			<nav class="top no_sticky" aria-hidden="true" data-no-scroll="1">
+				<a href="/" class="logo" data-qa="logo"></a>
+				<ul>
+					<li><a  href="#" data-qa="product">Notice</a></li>  <!--공지사항-->
+					<li><a  href="#" data-qa="pricing">Post</a></li>	<!--게시판-->
+					<li><a  href="#" data-qa="blog">Scrum</a></li>		<!--스크럼 게시판-->
+					<li><a  href="/home/chatting" data-qa="blog">Real-time Chat</a></li>		<!--채팅-->
+					<li><a  href="/home/members" data-qa="support">Members</a></li>
+					<% if user_signed_in? %>
+						<li class="sign_out"><%= link_to('Sign out', destroy_user_session_path, :method => :delete) %></li>
+					<% else %>
+						<li class="sign_up"><a href="/users/sign_up" data-qa="sign_up">Sign up</a></li>
+						<li class="sign_in"><a href="/users/sign_in" data-qa="sign_in">Sign in</a></li>
+					<% end %>
+				</ul>
+			</nav>
+		
 	<%= yield %>
+		<% if params[:action]!='index'%>
+		<footer class="footer_dark" data-qa="footer" style="transform: translateY(40%)">
+			<section>
+				<div class="grid">
+					<div class="col span_1_of_5">
+						<i class="ts_icon ts_icon_slack_pillow"></i>
+						<small>Made with <i class="ts_icon ts_icon_heart"></i> by Slack</small>
+					</div>
+					<div class="col span_1_of_5 nav_col">
+						<ul>
+							<li><a href="https://slack.com/brand-guidelines" data-qa="brand_guidelines">Brand Guidelines</a></li>
+							<li><a href="https://slack.com/jobs" data-qa="jobs">Jobs</a></li>
+							<!-- <li><a href="http://slackatwork.com" data-qa="slack_at_work">Slack at Work</a></li>
+							<li><a href="https://get.slack.help/hc/en-us" data-qa="support_footer">Support</a></li> -->
+						</ul>
+					</div>
+					<div class="col span_1_of_5 nav_col">
+						<ul>
+							<li><a href="https://slack.com/privacy-policy" data-qa="privacy">Privacy</a></li>
+							<li><a href="https://slack.com/security" data-qa="security">Security</a></li>
+							<!-- <li><a href="https://slack.com/terms-of-service" data-qa="tos">Terms of Service</a></li>
+							<li><a href="https://slack.com/policies" data-qa="policies">Policies</a></li> -->
+						</ul>
+					</div>
+					<div class="col span_1_of_5 nav_col">
+						<ul>
+							<li><a href="https://status.slack.com/" data-qa="status">Status</a></li>
+							<li><a href="https://slack.com/apps" data-qa="app_directory">App Directory</a></li>
+							<!-- <li><a href="https://api.slack.com/" data-qa="api">API</a></li>
+							<li><a href="https://slack.com/downloads" data-qa="downloads">Downloads</a></li> -->
+						</ul>
+					</div>
+					<div class="col span_1_of_5 nav_col">
+						<ul>
+							<li><a href="https://slack.com/varietypack" data-qa="podcast">Podcast</a></li>
+							<li><a href="https://slack-shop.myshopify.com" data-qa="slack_shop">Slack Shop</a></li>
+						</ul>
+					</div>
+				</div>
+			</section>
+		</footer>
+	<% end %>
 </body>
 
-<% if params[:action]!='index'%>
-	<footer class="footer_dark" data-qa="footer" style="transform: translateY(40%)">
-		<section>
-			<div class="grid">
-				<div class="col span_1_of_5">
-					<i class="ts_icon ts_icon_slack_pillow"></i>
-					<small>Made with <i class="ts_icon ts_icon_heart"></i> by Slack</small>
-				</div>
-				<div class="col span_1_of_5 nav_col">
-					<ul>
-						<li><a href="https://slack.com/brand-guidelines" data-qa="brand_guidelines">Brand Guidelines</a></li>
-						<li><a href="https://slack.com/jobs" data-qa="jobs">Jobs</a></li>
-						<!-- <li><a href="http://slackatwork.com" data-qa="slack_at_work">Slack at Work</a></li>
-						<li><a href="https://get.slack.help/hc/en-us" data-qa="support_footer">Support</a></li> -->
-					</ul>
-				</div>
-				<div class="col span_1_of_5 nav_col">
-					<ul>
-						<li><a href="https://slack.com/privacy-policy" data-qa="privacy">Privacy</a></li>
-						<li><a href="https://slack.com/security" data-qa="security">Security</a></li>
-						<!-- <li><a href="https://slack.com/terms-of-service" data-qa="tos">Terms of Service</a></li>
-						<li><a href="https://slack.com/policies" data-qa="policies">Policies</a></li> -->
-					</ul>
-				</div>
-				<div class="col span_1_of_5 nav_col">
-					<ul>
-						<li><a href="https://status.slack.com/" data-qa="status">Status</a></li>
-						<li><a href="https://slack.com/apps" data-qa="app_directory">App Directory</a></li>
-						<!-- <li><a href="https://api.slack.com/" data-qa="api">API</a></li>
-						<li><a href="https://slack.com/downloads" data-qa="downloads">Downloads</a></li> -->
-					</ul>
-				</div>
-				<div class="col span_1_of_5 nav_col">
-					<ul>
-						<li><a href="https://slack.com/varietypack" data-qa="podcast">Podcast</a></li>
-						<li><a href="https://slack-shop.myshopify.com" data-qa="slack_shop">Slack Shop</a></li>
-					</ul>
-				</div>
-			</div>
-		</section>
-	</footer>
-<% end %>
+
 
 </html>	

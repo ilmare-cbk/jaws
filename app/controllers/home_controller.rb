@@ -25,4 +25,19 @@ class HomeController < ApplicationController
     
     render :text => ""
   end
+
+  def write_email
+  end
+
+  def email_send
+      to = params[:to]
+      from = params[:from]
+      title = params[:title]
+      content = params[:content]
+      Contact.send_email(to, from, title, content).deliver_now
+      redirect_to '/home/members'
+  end
+
+  
+
 end

@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+gem 'mailgun_rails'
 gem 'pusher'
 gem 'bcrypt-ruby', '3.1.1.rc1', :require => 'bcrypt'
 gem 'coffee-script-source', '1.8.0'

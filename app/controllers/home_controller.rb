@@ -39,6 +39,9 @@ class HomeController < ApplicationController
       redirect_to '/home/members'
   end
 
+  def scrum
+  end
+
   
 
 end

@@ -1,0 +1,85 @@
+<head>
+  <meta charset="utf-8">
+  <title>jQuery UI Sortable - Connect lists</title>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+  <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+  <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <style>
+  #sortable1, #sortable2 {
+    border: 1px solid #eee;
+    width: 142px;
+    min-height: 20px;
+    list-style-type: none;
+    margin: 0;
+    padding: 5px 0 0 0;
+    float: left;
+    margin-right: 10px;
+  }
+  #sortable1 li, #sortable2 li {
+    margin: 0 5px 5px 5px;
+    padding: 5px;
+    font-size: 1.2em;
+    width: 120px;
+    border-radius: 3px;
+  }
+  </style>
+  <script>
+  $(function() {
+    $( "#sortable1, #sortable2" ).sortable({
+      connectWith: ".connectedSortable"
+    }).disableSelection();
+  });
+  </script>
+</head>
+
+<body>
+	<!-- Page Header -->
+	<!-- Set your background image for this header on the line below. -->
+	<div style="width:100%; height:400px">
+		<header class="intro-header" style="background-image: url('http://ncc.phinf.naver.net/20150506_137/1430871440020F8S1u_JPEG/000.jpg?type=w646'); background-repeat:no-repeat; background-size: 100% 400px" >
+		    <div class="container">
+		        <div class="row">
+		            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+		                <div class="site-heading">
+		                    <h1>SCRUM</h1>
+		                    <hr class="small">
+		                    <span class="subheading">효율적인 일처리를 위한 스크럼페이지</span>
+		                </div>
+		            </div>
+		        </div>
+		    </div>
+		</header>
+	</div>
+
+	<div class="col-md-3" id="to_do" style="background-color:white">
+		<ul id="sortable1" class="connectedSortable">
+		  <li class="ui-state-default">Item 1</li>
+		  <li class="ui-state-default">Item 2</li>
+		  <li class="ui-state-default">Item 3</li>
+		  <li class="ui-state-default">Item 4</li>
+		  <li class="ui-state-default">Item 5</li>
+		</ul>
+	</div>
+	<div class="col-md-3" id="emergency" style="background-color:yellow">
+		<ul id="sortable2" class="connectedSortable">
+		  <li class="ui-state-highlight">Item 1</li>
+		  <li class="ui-state-highlight">Item 2</li>
+		  <li class="ui-state-highlight">Item 3</li>
+		  <li class="ui-state-highlight">Item 4</li>
+		  <li class="ui-state-highlight">Item 5</li>
+		</ul>
+	</div>
+	<div class="col-md-3" id="doing" style="background-color:blue">
+		
+	</div>
+	<div class="col-md-3" id="done" style="background-color:red">
+		
+	</div>
+	<a href="/home/index">홈으로</a>
+
+	
+	 
+	
+
+</body>
